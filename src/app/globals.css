@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --background-rgb: 245, 247, 250;
+  --foreground-rgb: 33, 37, 41;
+  --font-custom: 'Poppins', sans-serif;
+  
+  /* Primary Theme Colors (Default: Violet/Purple) */
+  --primary-rgb: 124, 58, 237; /* violet-600 */
+  --primary-glow: rgba(124, 58, 237, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+.dark {
+  --background-rgb: 10, 10, 18;
+  --foreground-rgb: 243, 244, 246;
+  
+  --primary-rgb: 139, 92, 246; /* violet-500 */
+  --primary-glow: rgba(139, 92, 246, 0.25);
+  --glass-bg: rgba(15, 15, 25, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Primary color overrides based on user settings */
+[data-primary="blue"] {
+  --primary-rgb: 59, 130, 246;
+  --primary-glow: rgba(59, 130, 246, 0.2);
+}
+[data-primary="purple"] {
+  --primary-rgb: 147, 51, 234;
+  --primary-glow: rgba(147, 51, 234, 0.2);
+}
+[data-primary="violet"] {
+  --primary-rgb: 124, 58, 237;
+  --primary-glow: rgba(124, 58, 237, 0.2);
+}
+[data-primary="rose"] {
+  --primary-rgb: 244, 63, 94;
+  --primary-glow: rgba(244, 63, 94, 0.2);
+}
+[data-primary="emerald"] {
+  --primary-rgb: 16, 185, 129;
+  --primary-glow: rgba(16, 185, 129, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-custom);
+  background-color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
+}
+
+.dark .glass-card:hover {
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  color: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.dark .glass-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-input:focus {
+  border-color: rgb(var(--primary-rgb));
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* Animated Gradient Background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 50% 80%, rgba(244, 63, 94, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.dark .animated-bg {
+  background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.07) 0%, transparent 40%),
+              radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.07) 0%, transparent 40%),
+              radial-gradient(circle at 50% 80%, rgba(244, 63, 94, 0.03) 0%, transparent 50%),
+              #080810;
+}
+
+/* Decorative Floating Orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.dark .orb {
+  opacity: 0.25;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(100px, 50px) scale(1.2);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+  appearance: none;
+  border: 2px solid rgba(var(--primary-rgb), 0.4);
+  border-radius: 0.375rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-checkbox:checked {
+  background-color: rgb(var(--primary-rgb));
+  border-color: rgb(var(--primary-rgb));
+}
+
+.custom-checkbox:checked::after {
+  content: '✓';
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.custom-checkbox:focus-visible {
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+/* Custom Calendar Event Grid */
+.calendar-grid-cell {
+  position: relative;
+  aspect-ratio: 1;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.15s ease;
+}
+
+.calendar-grid-cell:hover {
+  background-color: rgba(var(--primary-rgb), 0.05);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgb(var(--primary-rgb));
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.15s, height 0.15s, border-color 0.15s;
+  mix-blend-mode: difference;
+}
